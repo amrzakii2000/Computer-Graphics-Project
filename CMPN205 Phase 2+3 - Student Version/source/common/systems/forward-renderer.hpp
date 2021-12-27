@@ -49,7 +49,7 @@ namespace our
                     // We construct a command from it
                     RenderCommand command;
                     command.localToWorld = meshRenderer->getOwner()->getLocalToWorldMatrix();
-                    command.center = glm::vec3(command.localToWorld * glm::vec4(0, 0, 0, 1));
+                    command.center = glm::vec3(command.localToWorld * glm::vec4(0, 0, -1, 1));
                     command.mesh = meshRenderer->mesh;
                     command.material = meshRenderer->material;
                     // if it is transparent, we add it to the transparent commands list
@@ -80,7 +80,7 @@ namespace our
                 //TODO: Finish this function
                 // HINT: the following function return should return true "first" should be drawn before "second".
 
-                return first.center.z < second.center.z; //The smallest is the farthest
+                return glm::distance(cameraForward, first.center) > glm::distance(cameraForward, second.center); //The farthest from the camera forward vector
             });
 
             //TODO: Get the camera ViewProjection matrix and store it in VP 
