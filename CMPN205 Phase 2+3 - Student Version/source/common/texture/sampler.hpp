@@ -37,6 +37,9 @@ namespace our {
 
         // This function sets a sampler paramter where the value is of type "GLint"
         // This can be used to set the filtering and wrapping parameters
+
+
+        //(my sampler, Specifies the symbolic name of a sampler parameter. Ex: GL_NEAREST,el value: ansitropy ? mag filter ? wrap s or t ?) 
         void set(GLenum parameter, GLint value) const {
             //TODO: Complete this function
             glSamplerParameteri(name, parameter, value);
@@ -44,6 +47,7 @@ namespace our {
 
         // This function sets a sampler paramter where the value is of type "GLfloat"
         // This can be used to set the "GL_TEXTURE_MAX_ANISOTROPY_EXT" parameter
+        //for float
         void set(GLenum parameter, GLfloat value) const {
             //TODO: Complete this function
             glSamplerParameterf(name, parameter, value);
@@ -51,6 +55,7 @@ namespace our {
 
         // This function sets a sampler paramter where the value is of type "GLfloat[4]"
         // This can be used to set the "GL_TEXTURE_BORDER_COLOR" parameter
+        //for float vector
         void set(GLenum parameter, glm::vec4 value) const {
             glSamplerParameterfv(name, parameter, &(value.r));
         }

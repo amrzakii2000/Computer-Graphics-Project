@@ -8,8 +8,8 @@ namespace our {
     // This function should setup the pipeline state and set the shader to be used
     void Material::setup() const {
         //TODO: Write this function
-        pipelineState.setup();
-        shader->use();
+        pipelineState.setup(); //setup our object pipeline
+        shader->use(); //use the shader
     }
 
     // This function read the material data from a json object
@@ -46,11 +46,15 @@ namespace our {
         TintedMaterial::setup();
         shader->set("alphaThreshold", alphaThreshold);
 
-        glActiveTexture(GL_TEXTURE0);
+        //Select active texture unit
+        glActiveTexture(GL_TEXTURE2);
+        //bind el texture to the active texture unit
         texture->bind();
-        sampler->bind(0);
+        //Bind sampler to active texture unit
+        sampler->bind(2);
 
-        shader->set("tex", 0);
+        //Send the unit number to the shader
+        shader->set("tex", 2);
     }
 
     // This function read the material data from a json object

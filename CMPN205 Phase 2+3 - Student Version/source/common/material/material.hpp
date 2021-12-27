@@ -47,7 +47,7 @@ namespace our {
     public:
         Texture2D* texture;
         Sampler* sampler;
-        float alphaThreshold;
+        float alphaThreshold; //if the alpha of the object is less than the alphathreshold it will be fully transparent
 
         void setup() const override;
         void deserialize(const nlohmann::json& data) override;
