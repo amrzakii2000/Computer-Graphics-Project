@@ -226,7 +226,7 @@
         ]
       },
       {
-        "position": [ 0, 1, 8 ],
+        "position": [ 0, 2, 8 ],
         "rotation": [ 0, -1, 0 ],
         "scale": [ 1, 1, 1 ],
         "components": [
@@ -241,7 +241,7 @@
             "color": [1, 0, 1],
             "attenuation": [0.1, 0.01, 0.001],
             "direction": [0,-1,0],
-            "cone_angles": [30, 50],
+            "cone_angles": [10, 40],
             "lightType": "Spot"
           }
         ]
