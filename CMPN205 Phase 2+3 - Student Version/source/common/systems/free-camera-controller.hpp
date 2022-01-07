@@ -90,6 +90,8 @@ namespace our
 
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
+            float posy=position.y;
+
             if(app->getKeyboard().isPressed(GLFW_KEY_W)) position += front * (deltaTime * current_sensitivity.z);
             if(app->getKeyboard().isPressed(GLFW_KEY_S)) position -= front * (deltaTime * current_sensitivity.z);
             // Q & E moves the player up and down
@@ -98,6 +100,7 @@ namespace our
             // A & D moves the player left or right 
             if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x);
             if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x);
+            position.y=posy;
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
