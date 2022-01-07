@@ -113,21 +113,25 @@ namespace our
             for(auto command : opaqueCommands){
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
-                // if(dynamic_cast<LitMaterial*>(command.material)){
-                //     LitMaterial* litMaterial = dynamic_cast<LitMaterial*>(command.material);
+                if(dynamic_cast<LitMaterial*>(command.material)){
+                    LitMaterial* litMaterial = dynamic_cast<LitMaterial*>(command.material);
 
-                //     command.material->shader->set("VP", VP);
-                //     command.material->shader->set("eye", eye);
-                //     command.material->shader->set("M", command.localToWorld);
-                //     command.material->shader->set("M_IT", glm::inverse(command.localToWorld) );
+                    command.material->shader->set("VP", VP);
+                    command.material->shader->set("eye", eye);
+                    command.material->shader->set("M", command.localToWorld);
+                    command.material->shader->set("M_IT", glm::inverse(command.localToWorld) );
 
-                //     command.material->shader->set("light_count", 1);
-                //     command.material->shader->set("lights[0].color", glm::vec3(1,0,0));
-                //     command.material->shader->set("lights[0].position", command.transform.position);
-                //     command.material->shader->set("lights[0].attenuation", glm::vec3(0, 0, 1));
-                //     command.material->shader->set("lights[0].cone_angles", glm::vec2(glm::radians(15.0f), glm::radians(30.0f)));
-                //     command.material->shader->set("lights[0].lightType", 3);
-                // }
+                    command.material->shader->set("light_count", 1);
+                    command.material->shader->set("lights[0].color", glm::vec3(1,1,0));
+                    command.material->shader->set("lights[0].position", command.transform.position);
+                    command.material->shader->set("lights[0].attenuation", glm::vec3(0, 0, 1));
+                    command.material->shader->set("lights[0].cone_angles", glm::vec2(glm::radians(15.0f), glm::radians(30.0f)));
+                    command.material->shader->set("lights[0].lightType", 3);
+
+                    command.material->shader->set("sky_light.sky", glm::vec3(1, 0, 0));
+                    command.material->shader->set("sky_light.horizon", glm::vec3(0.5, 0.5, 0.5));
+                    command.material->shader->set("sky_light.ground", glm::vec3(0.2, 0.7, 0.4));
+                }
                 command.mesh->draw();
             }
             for(auto command : transparentCommands){
