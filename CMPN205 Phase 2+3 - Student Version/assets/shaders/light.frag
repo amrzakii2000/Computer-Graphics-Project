@@ -83,7 +83,7 @@ void main(){
 
         vec3 diffuse = material_albedo * light.color * lambert(normal, light_vec);
         vec3 specular = material_specular * light.color * phong(normal, light_vec, view, shininess);
-        //vec3 ambient = material_ao * material_albedo * 0.1;
+        vec3 ambient = material_ao * material_albedo * 0.1;
 
         float attenuation = 1;
         if(light.type != DIRECTIONAL){
@@ -92,10 +92,9 @@ void main(){
             if(light.type == SPOT){
                 float angle = acos(-dot(light.direction, light_vec));
                 attenuation *= smoothstep(light.cone_angles.y, light.cone_angles.x, angle);
-               // printf("%f, %f\n",light.cone_angles.x,ight.cone_angles.y);
             }
         }
 
-        frag_color.rgb += (diffuse + specular) * attenuation; // + ambient;
+        frag_color.rgb += (diffuse + specular) * attenuation + ambient;
     }
 }
