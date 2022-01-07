@@ -151,7 +151,7 @@ namespace our
                         case LightType::POINT:
                             break;
                         case LightType::SPOT:
-                        printf("%f, %f\n",lights[i]->cone_angles.x,lights[i]->cone_angles.y);
+                                command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->getOwner()->localTransform.rotation));
                                command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
                             break;
                         }
