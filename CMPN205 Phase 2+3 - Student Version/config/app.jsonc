@@ -31,7 +31,8 @@
         "glass": "assets/textures/glass-panels.png",
         "monkey": "assets/textures/monkey.png",
         "bug": "assets/textures/bug.jpg",
-        "roughness": "assets/textures/roughness.jpg"
+        "roughness": "assets/textures/roughness.jpg",
+        "albedo": "assets/textures/albedo.jpg"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -126,7 +127,8 @@
           },
           "tint": [1, 1, 1, 1],
           "texture": "monkey",
-          "sampler": "default"
+          "sampler": "default",
+          "albedo":"monkey"
         },
         "moon": {
           "type": "lit",
@@ -226,8 +228,8 @@
         ]
       },
       {
-        "position": [ 0, 2, 8 ],
-        "rotation": [ 0, -1, 0 ],
+        "position": [ 0, 10, 0 ],
+        "rotation": [ -90, -45,-45 ],
         "scale": [ 1, 1, 1 ],
         "components": [
           {
@@ -239,7 +241,7 @@
            {
             "type": "Light",
             "color": [1, 0, 1],
-            "attenuation": [0.1, 0.01, 0.001],
+            "attenuation": [0.1, 0.5, 0.5],
             "direction": [0,-1,0],
             "cone_angles": [10, 40],
             "lightType": "Spot"
