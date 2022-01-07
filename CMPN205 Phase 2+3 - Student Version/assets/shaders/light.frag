@@ -83,7 +83,7 @@ void main(){
 
         vec3 diffuse = material_albedo * light.color * lambert(normal, light_vec);
         vec3 specular = material_specular * light.color * phong(normal, light_vec, view, shininess);
-        //vec3 ambient = material_ao * material_albedo * 0.1;
+        vec3 ambient = material_ao * material_albedo * 0.1;
 
         float attenuation = 1;
         if(light.type != DIRECTIONAL){
@@ -95,6 +95,6 @@ void main(){
             }
         }
 
-        frag_color.rgb += (diffuse + specular) * attenuation; // + ambient;
+        frag_color.rgb += (diffuse + specular) * attenuation + ambient;
     }
 }
