@@ -47,14 +47,14 @@ namespace our {
         shader->set("alphaThreshold", alphaThreshold);
 
         //Select active texture unit
-        glActiveTexture(GL_TEXTURE2);
+        glActiveTexture(GL_TEXTURE0);
         //bind el texture to the active texture unit
         texture->bind();
         //Bind sampler to active texture unit
-        sampler->bind(2);
+        sampler->bind(0);
 
         //Send the unit number to the shader
-        shader->set("tex", 2);
+        shader->set("tex", 0);
     }
 
     // This function read the material data from a json object
@@ -66,4 +66,59 @@ namespace our {
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
     }
 
+    //Implement the setup function for the lit material
+    void LitMaterial::setup() const {
+        TexturedMaterial::setup();
+        // Select active texture unit
+        glActiveTexture(GL_TEXTURE1);
+        // bind el texture to the active texture unit
+        emission->bind();
+        // Bind sampler to active texture unit
+        sampler->bind(1);
+        shader->set("material.emission", 1);
+
+        // Select active texture unit
+        glActiveTexture(GL_TEXTURE2);
+        // bind el texture to the active texture unit
+        roughness->bind();
+        // Bind sampler to active texture unit
+        sampler->bind(2);
+        shader->set("material.roughness", 2);
+
+        // Select active texture unit
+        glActiveTexture(GL_TEXTURE3);
+        // bind el texture to the active texture unit
+        albedo->bind();
+        // Bind sampler to active texture unit
+        sampler->bind(3);
+        shader->set("material.albedo", 3);
+
+        // Select active texture unit
+        glActiveTexture(GL_TEXTURE4);
+        // bind el texture to the active texture unit
+        specular->bind();
+        // Bind sampler to active texture unit
+        sampler->bind(4);
+        shader->set("material.specular", 4);
+
+        // Select active texture unit
+        glActiveTexture(GL_TEXTURE5);
+        // bind el texture to the active texture unit
+        ao->bind();
+        // Bind sampler to active texture unit
+        sampler->bind(5);
+        shader->set("material.ambient_occlusion", 5);
+    }
+
+    //implement deserialize for LintMaterial class
+    void LitMaterial::deserialize(const nlohmann::json& data) {
+        TexturedMaterial::deserialize(data);
+        if(!data.is_object()) return;
+        albedo = AssetLoader<Texture2D>::get(data.value("albedo", ""));
+        specular = AssetLoader<Texture2D>::get(data.value("specular", ""));
+        roughness = AssetLoader<Texture2D>::get(data.value("roughness", ""));
+        emission = AssetLoader<Texture2D>::get(data.value("emission", ""));
+        ao = AssetLoader<Texture2D>::get(data.value("ao", ""));
+        printf("sucessfully loaded lit material\n");
+    }
 }

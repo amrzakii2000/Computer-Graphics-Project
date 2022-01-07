@@ -1,12 +1,15 @@
 #pragma once
 
 #include "../ecs/world.hpp"
+#include "../ecs/transform.hpp"
 #include "../components/camera.hpp"
+#include "../components/light.hpp"
 #include "../components/mesh-renderer.hpp"
 
 #include <glad/gl.h>
 #include <vector>
 #include <algorithm>
+#include<iostream>
 
 namespace our
 {
@@ -17,7 +20,8 @@ namespace our
     struct RenderCommand {
         glm::mat4 localToWorld;
         glm::vec3 center;
-        Mesh* mesh;
+        Transform transform;
+        Mesh *mesh;
         Material* material;
     };
 
@@ -52,6 +56,8 @@ namespace our
                     command.center = glm::vec3(command.localToWorld * glm::vec4(0, 0, 0, 1));
                     command.mesh = meshRenderer->mesh;
                     command.material = meshRenderer->material;
+                    command.transform = entity->localTransform;
+
                     // if it is transparent, we add it to the transparent commands list
                     if(command.material->transparent){
                         transparentCommands.push_back(command);
@@ -86,6 +92,7 @@ namespace our
             //TODO: Get the camera ViewProjection matrix and store it in VP 
             glm::mat4 VP = camera->getProjectionMatrix(viewportSize) * camera->getViewMatrix();
             
+
             //TODO: Set the OpenGL viewport using viewportStart and viewportSize
             //Takes coordinates of lower left of the screen and the width and the height of the screen to change to window coordinates
             glViewport(viewportStart.x, viewportStart.y, viewportSize.x, viewportSize.y);
@@ -106,6 +113,21 @@ namespace our
             for(auto command : opaqueCommands){
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
+                // if(dynamic_cast<LitMaterial*>(command.material)){
+                //     LitMaterial* litMaterial = dynamic_cast<LitMaterial*>(command.material);
+
+                //     command.material->shader->set("VP", VP);
+                //     command.material->shader->set("eye", eye);
+                //     command.material->shader->set("M", command.localToWorld);
+                //     command.material->shader->set("M_IT", glm::inverse(command.localToWorld) );
+
+                //     command.material->shader->set("light_count", 1);
+                //     command.material->shader->set("lights[0].color", glm::vec3(1,0,0));
+                //     command.material->shader->set("lights[0].position", command.transform.position);
+                //     command.material->shader->set("lights[0].attenuation", glm::vec3(0, 0, 1));
+                //     command.material->shader->set("lights[0].cone_angles", glm::vec2(glm::radians(15.0f), glm::radians(30.0f)));
+                //     command.material->shader->set("lights[0].lightType", 3);
+                // }
                 command.mesh->draw();
             }
             for(auto command : transparentCommands){
