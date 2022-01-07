@@ -70,7 +70,9 @@
               "enabled": true
             }
           },
-          "tint": [ 1, 1, 1, 1 ]
+          "tint": [ 1, 1, 1, 1 ],
+          "texture": "monkey",
+          "sampler":"default"
         },
         "glass": {
           "type": "textured",
