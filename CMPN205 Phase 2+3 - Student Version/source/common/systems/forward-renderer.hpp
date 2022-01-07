@@ -143,11 +143,23 @@ namespace our
                     {
                         std::string light_name = "lights[" + std::to_string(i) + "]";
                         glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
+                        switch (lights[i]->lightType)
+                        {
+                        case LightType::DIRECTIONAL:
+                            command.material->shader->set(light_name + ".direction", glm::normalize(command.center - lightPos));
+                            break;
+                        case LightType::POINT:
+                            break;
+                        case LightType::SPOT:
+                        printf("%f, %f\n",lights[i]->cone_angles.x,lights[i]->cone_angles.y);
+                               command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
+                            break;
+                        }
                         command.material->shader->set(light_name + ".position", lightPos);
-                        command.material->shader->set(light_name + ".direction", command.center - lightPos);
+                        // command.material->shader->set(light_name + ".direction", command.center - lightPos);
                         command.material->shader->set(light_name + ".color", lights[i]->color);
                         command.material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
-                        command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
+                        // command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
                         command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);
                     }
                 }
