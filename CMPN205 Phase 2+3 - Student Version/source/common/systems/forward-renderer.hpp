@@ -34,6 +34,8 @@ namespace our
         // We define them here (instead of being local to the "render" function) as an optimization to prevent reallocating them every frame
         std::vector<RenderCommand> opaqueCommands;
         std::vector<RenderCommand> transparentCommands;
+        std::vector<LightComponent*> lights;
+
     public:
         // This function should be called every frame to draw the given world
         // Both viewportStart and viewportSize are using to define the area on the screen where we will draw the scene
@@ -65,6 +67,9 @@ namespace our
                     // Otherwise, we add it to the opaque command list
                         opaqueCommands.push_back(command);
                     }
+                }
+                if (auto light = entity->getComponent<LightComponent>(); light){
+                    lights.push_back(light);
                 }
             }
 
@@ -113,40 +118,29 @@ namespace our
             for(auto command : opaqueCommands){
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
-                if(dynamic_cast<LitMaterial*>(command.material)){
-                    LitMaterial* litMaterial = dynamic_cast<LitMaterial*>(command.material);
 
-                    command.material->shader->set("VP", VP);
-                    command.material->shader->set("eye", eye);
-                    command.material->shader->set("M", command.localToWorld);
-                    command.material->shader->set("M_IT", glm::inverse(command.localToWorld) );
+                command.material->shader->set("VP", VP);
+                command.material->shader->set("eye", eye);
+                command.material->shader->set("M", command.localToWorld);
+                command.material->shader->set("M_IT", glm::inverse(command.localToWorld));
+                command.material->shader->set("light_count", (int)lights.size());
 
-                    command.material->shader->set("light_count", 2);
-                    command.material->shader->set("lights[0].color", glm::vec3(1,1,0));
-                    command.material->shader->set("lights[0].position", glm::vec3(0,10,0));
-                    command.material->shader->set("lights[0].attenuation", glm::vec3(0, 0, 1));
-                    command.material->shader->set("lights[0].cone_angles", glm::vec2(glm::radians(15.0f), glm::radians(30.0f)));
-                    command.material->shader->set("lights[0].type", 1);
+                //for (int i = 0; i < lights.size(); i++)
+                //{
+                //    printf("Fuck me\n");
+                //    std::string light_name = "lights[" + std::to_string(i) + "]";
+                //    glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
+                //    command.material->shader->set(light_name + ".position", lightPos);
+                //    //command.material->shader->set(light_name + ".direction", command.center - lightPos);
+                //    command.material->shader->set(light_name + ".color", lights[i]->color);
+                //    command.material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
+                //    command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
+                //    command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);
+                //}
 
-                    // command.material->shader->set("sky_light.sky", glm::vec3(1, 0, 0));
-                    // command.material->shader->set("sky_light.horizon", glm::vec3(0.5, 0.5, 0.5));
-                    // command.material->shader->set("sky_light.ground", glm::vec3(0.2, 0.7, 0.4));
-
-
-
-              
-                    command.material->shader->set("lights[1].color", glm::vec3(0,0,1));
-                    command.material->shader->set("lights[1].position", command.transform.position);
-                    command.material->shader->set("lights[1].attenuation", glm::vec3(0, 0, 1));
-                    command.material->shader->set("lights[1].cone_angles", glm::vec2(glm::radians(15.0f), glm::radians(30.0f)));
-                    command.material->shader->set("lights[1].type", 1);
-
-                    // command.material->shader->set("sky_light.sky", glm::vec3(1, 0, 0));
-                    // command.material->shader->set("sky_light.horizon", glm::vec3(0.5, 0.5, 0.5));
-                    // command.material->shader->set("sky_light.ground", glm::vec3(0.2, 0.7, 0.4));
-                }
                 command.mesh->draw();
-            }
+                }
+
             for(auto command : transparentCommands){
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
