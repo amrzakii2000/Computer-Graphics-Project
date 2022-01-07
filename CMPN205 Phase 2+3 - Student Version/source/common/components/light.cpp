@@ -30,6 +30,7 @@ namespace our
         color = glm::vec3(data["color"][0], data["color"][1], data["color"][2]);
         attenuation = glm::vec3(data["attenuation"][0], data["attenuation"][1], data["attenuation"][2]);
         cone_angles = glm::vec2(glm::radians((float)data["cone_angles"][0]), glm::radians((float)data["cone_angles"][1]));
+        direction = glm::vec3(data["direction"][0], data["direction"][1], data["direction"][2]);
     }
 
 }

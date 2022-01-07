@@ -23,6 +23,7 @@ namespace our {
         glm::vec3 color = glm::vec3(0, 0, 0); // The color of the light
 
         glm::vec3 attenuation = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 direction = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec2 cone_angles = glm::vec2(0.0f, 0.0f);
 
         static std::string getID() { return "Light"; }

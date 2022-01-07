@@ -146,20 +146,18 @@ namespace our
                         switch (lights[i]->lightType)
                         {
                         case LightType::DIRECTIONAL:
-                            command.material->shader->set(light_name + ".direction", glm::normalize(command.center - lightPos));
+                            command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
                             break;
                         case LightType::POINT:
                             break;
                         case LightType::SPOT:
-                                command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->getOwner()->localTransform.rotation));
-                               command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
+                            command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
+                            command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
                             break;
                         }
                         command.material->shader->set(light_name + ".position", lightPos);
-                        // command.material->shader->set(light_name + ".direction", command.center - lightPos);
                         command.material->shader->set(light_name + ".color", lights[i]->color);
                         command.material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
-                        // command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
                         command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);
                     }
                 }
