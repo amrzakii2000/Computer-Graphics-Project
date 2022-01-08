@@ -49,6 +49,8 @@ namespace our
             CameraComponent *camera = nullptr;
             opaqueCommands.clear();
             transparentCommands.clear();
+            lights.clear();
+
             for (auto entity : world->getEntities())
             {
                 // If we hadn't found a camera yet, we look for a camera in this entity
@@ -167,6 +169,37 @@ namespace our
             {
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
+                if (dynamic_cast<LitMaterial*>(command.material))
+                {
+                    LitMaterial* litMaterial = dynamic_cast<LitMaterial*>(command.material);
+
+                    command.material->shader->set("VP", VP);
+                    command.material->shader->set("eye", eye);
+                    command.material->shader->set("M", command.localToWorld);
+                    command.material->shader->set("M_IT", glm::inverse(command.localToWorld));
+                    command.material->shader->set("light_count", (int)lights.size());
+                    for (int i = 0; i < lights.size(); i++)
+                    {
+                        std::string light_name = "lights[" + std::to_string(i) + "]";
+                        glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
+                        switch (lights[i]->lightType)
+                        {
+                        case LightType::DIRECTIONAL:
+                            command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
+                            break;
+                        case LightType::POINT:
+                            break;
+                        case LightType::SPOT:
+                            command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
+                            command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
+                            break;
+                        }
+                        command.material->shader->set(light_name + ".position", lightPos);
+                        command.material->shader->set(light_name + ".color", lights[i]->color);
+                        command.material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
+                        command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);
+                    }
+                }
                 command.mesh->draw();
             }
         };
