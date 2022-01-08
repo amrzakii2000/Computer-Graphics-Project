@@ -3,7 +3,7 @@
 #include "../ecs/world.hpp"
 #include "../ecs/entity.hpp"
 #include "../components/camera.hpp"
-#include "../components/free-camera-controller.hpp"
+#include "../components/shootingComponent.hpp"
 
 #include "../application.hpp"
 
@@ -22,39 +22,57 @@ namespace our
     class shooting
     {
         Application *app; // The application in which the state runs
+        bool IsShot;
+        float time;
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)
         {
             this->app = app;
+            IsShot = false;
         }
+        
         void update(World *world, float deltaTime){
             Entity* fireball = nullptr;
             Entity* gun = nullptr;
+            CameraComponent* camera = nullptr;
+            ShootingComponent* shooting = nullptr;
 
             for (auto entity : world->getEntities())
             {
-                if (entity->name == "fireball")
-                {
-                    fireball = entity;
-                }
-
                 if (entity->name == "revolver")
                 {
                     gun = entity;
                 }
+
+                if(entity->getComponent<CameraComponent>() != nullptr){
+                    camera = entity->getComponent<CameraComponent>();
+                }
+
+                if(entity->getComponent<ShootingComponent>() != nullptr){
+                    shooting = entity->getComponent<ShootingComponent>();
+                }
+                
             }
 
-            std::cout << "ya rab tsht8al" << std::endl;
-            if (fireball == nullptr || gun == nullptr) return;
+            if (shooting)
+                fireball = shooting->getOwner();
 
+            if (!fireball|| !gun || !camera) return;
+
+            time += deltaTime;
+            if(time > 0.6){
+                time = 0;
+                IsShot = false;
+                fireball->localTransform.position = gun->localTransform.position + glm::vec3(0, 0.2, 0.3);
+            }
             //if space bar is pressed set the fireball position to gun position
-            std::cout << "ya rab" << std::endl;
-            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE))
-            {
-                std::cout<<"eshta8lt"<<std::endl;
-                fireball->localTransform.position = gun->localTransform.position;
+            if (app->getKeyboard().isPressed(GLFW_KEY_E)) IsShot = true;
+
+            if(IsShot){
+                fireball->localTransform.position += deltaTime * glm::vec3(0, 0, shooting->speed);
             }
+            
         }
 
         };

@@ -35,14 +35,16 @@ class Playstate : public our::State
         }
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
+        shooting.enter(getApp());
     }
 
     void onDraw(double deltaTime) override
     {
         // Here, we just run a bunch of systems to control the world logic
-        shooting.update(&world, (float)deltaTime);
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
+        shooting.update(&world, (float)deltaTime);
+
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);

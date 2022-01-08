@@ -30,14 +30,12 @@
         "bug": "assets/textures/bug.png",
         // "backGround": "assets/textures/backGround.png",
         // "tunnel":"assets/textures/tunnel.png",
-        "tunnel2":"assets/textures/Gredient.png",
+        "tunnel2": "assets/textures/Gredient.png",
         // "tunnel3":"assets/textures/tunnel3.png",
         // "tunnel4":"assets/textures/tunnel4.png",
         // "tunnel5":"assets/textures/tunnel5.png",
         // "tunnel6":"assets/textures/ABSolnScifiMetallic-ABSolnSciFiRoughness@channels=B.png",
-        "fireBall":"assets/textures/fire.front.png"
-
-
+        "fireBall": "assets/textures/fire.front.png"
       },
       "meshes": {
         // "cube": "assets/models/cube.obj",
@@ -48,8 +46,8 @@
         "bug": "assets/models/bug.obj",
         // "backGround":"assets/models/backGround.obj",
         // "tunnel":"assets/models/tunnel.obj",
-        "tunnel6":"assets/models/SciFi_Hallway.obj",
-        "fireBall":"assets/models/fireBall.obj"
+        "tunnel6": "assets/models/SciFi_Hallway.obj",
+        "fireBall": "assets/models/fireBall.obj"
       },
       "samplers": {
         "default": {},
@@ -169,50 +167,50 @@
           "sampler": "default"
         },
         "tunnel": {
-            "type": "textured",
-            "shader": "textured",
-            "pipelineState": {
-              "faceCulling": {
-                "enabled": true
-              },
-              "depthTesting": {
-                "enabled": true
-              }
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": true
             },
-            "tint": [1, 1, 1, 1],
-            "texture": "tunnel2",
-            "sampler": "default"
+            "depthTesting": {
+              "enabled": true
+            }
           },
-          "fireBall": {
-            "type": "textured",
-            "shader": "textured",
-            "pipelineState": {
-              "faceCulling": {
-                "enabled": true
-              },
-              "depthTesting": {
-                "enabled": true
-              }
+          "tint": [1, 1, 1, 1],
+          "texture": "tunnel2",
+          "sampler": "default"
+        },
+        "fireBall": {
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": true
             },
-            "tint": [1, 1, 1, 1],
-            "texture": "fireBall",
-            "sampler": "default"
+            "depthTesting": {
+              "enabled": true
+            }
           },
+          "tint": [1, 1, 1, 1],
+          "texture": "fireBall",
+          "sampler": "default"
+        },
         "backGround": {
-            "type": "textured",
-            "shader": "textured",
-            "pipelineState": {
-              "faceCulling": {
-                "enabled": false
-              },
-              "depthTesting": {
-                "enabled": true
-              }
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
             },
-            "tint": [1, 1, 1, 1],
-            "texture": "backGround",
-            "sampler": "default"
-          }
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "tint": [1, 1, 1, 1],
+          "texture": "backGround",
+          "sampler": "default"
+        }
       }
     },
     "world": [
@@ -237,12 +235,30 @@
                 "mesh": "Revolver",
                 "material": "Revolver"
               }
+            ],
+            "children": [
+              {
+                "name": "fireball",
+                "position": [1, -0.2, 8],
+                "scale": [0.001, 0.001, 0.001],
+                "components": [
+                  {
+                    "type": "Mesh Renderer",
+                    "mesh": "fireBall",
+                    "material": "fireBall"
+                  },
+                  {
+                    "type":"Shooting",
+                    "speed":-25
+                  }
+                ]
+              }
             ]
           }
         ]
       },
       {
-        "position":[0,0,0],
+        "position": [0, 0, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
         "components": [
@@ -258,7 +274,7 @@
         ]
       },
       {
-        "position":[5,0,0],
+        "position": [5, 0, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
         "components": [
@@ -274,7 +290,7 @@
         ]
       },
       {
-        "position":[-5,0,0],
+        "position": [-5, 0, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
         "components": [
@@ -286,52 +302,35 @@
           {
             "type": "Movement",
             "angularVelocity": [0, 45, 0]
-          }
-        ]
-      },
-      {
-        "name": "fireball",
-        "position": [1, -0.2, 8],
-        "scale": [0.001, 0.001, 0.001],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "fireBall",
-            "material": "fireBall"
-          },
-          {
-            "type": "Movement",
-            "linearVelocity":[0,0,-1]
           }
         ]
       },
 
-    //   {
-    //     "position": [0, -1, 5],
-    //     "rotation": [-90, 0, 0],
-    //     "scale": [10, 10, 10],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "backGround"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "position": [0, 6, 5],
-    //     "rotation": [-90, 0, 0],
-    //     "scale": [10, 10, 10],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "backGround"
-    //       }
-    //     ]
-    //   },
+      //   {
+      //     "position": [0, -1, 5],
+      //     "rotation": [-90, 0, 0],
+      //     "scale": [10, 10, 10],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "backGround"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "position": [0, 6, 5],
+      //     "rotation": [-90, 0, 0],
+      //     "scale": [10, 10, 10],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "backGround"
+      //       }
+      //     ]
+      //   },
 
-    
       {
         "position": [15, 20, 0],
         "rotation": [0, 0, 0],
@@ -345,106 +344,103 @@
         ]
       }
 
+      //   {
+      //     "position": [0, 3, 15],
+      //     "rotation": [0, 0, 90],
+      //     "scale": [10, 10, 10],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "backGround"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "position": [8, -1, 5],
+      //     "rotation": [0, 90, 0],
+      //     "scale": [10, 10, 10],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "backGround"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "position": [-8, -1, 5],
+      //     "rotation": [0, 90, 0],
+      //     "scale": [10, 10, 10],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "backGround"
+      //       }
+      //     ]
+      //   },
 
-    //   {
-    //     "position": [0, 3, 15],
-    //     "rotation": [0, 0, 90],
-    //     "scale": [10, 10, 10],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "backGround"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "position": [8, -1, 5],
-    //     "rotation": [0, 90, 0],
-    //     "scale": [10, 10, 10],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "backGround"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "position": [-8, -1, 5],
-    //     "rotation": [0, 90, 0],
-    //     "scale": [10, 10, 10],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "backGround"
-    //       }
-    //     ]
-    //   },
-    
-      
-     
-    //   {
-    //     "position": [0, 1, 2],
-    //     "rotation": [0, 0, 0],
-    //     "scale": [2, 2, 2],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "glass"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "position": [0, 1, -2],
-    //     "rotation": [0, 0, 0],
-    //     "scale": [2, 2, 2],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "glass"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "position": [2, 1, 0],
-    //     "rotation": [0, 90, 0],
-    //     "scale": [2, 2, 2],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "glass"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "position": [-2, 1, 0],
-    //     "rotation": [0, 90, 0],
-    //     "scale": [2, 2, 2],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "glass"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "position": [0, 3, 0],
-    //     "rotation": [90, 0, 0],
-    //     "scale": [2, 2, 2],
-    //     "components": [
-    //       {
-    //         "type": "Mesh Renderer",
-    //         "mesh": "plane",
-    //         "material": "glass"
-    //       }
-    //     ]
-    //   },
+      //   {
+      //     "position": [0, 1, 2],
+      //     "rotation": [0, 0, 0],
+      //     "scale": [2, 2, 2],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "glass"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "position": [0, 1, -2],
+      //     "rotation": [0, 0, 0],
+      //     "scale": [2, 2, 2],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "glass"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "position": [2, 1, 0],
+      //     "rotation": [0, 90, 0],
+      //     "scale": [2, 2, 2],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "glass"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "position": [-2, 1, 0],
+      //     "rotation": [0, 90, 0],
+      //     "scale": [2, 2, 2],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "glass"
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "position": [0, 3, 0],
+      //     "rotation": [90, 0, 0],
+      //     "scale": [2, 2, 2],
+      //     "components": [
+      //       {
+      //         "type": "Mesh Renderer",
+      //         "mesh": "plane",
+      //         "material": "glass"
+      //       }
+      //     ]
+      //   },
       // {
       //   "position": [0, 30, 0],
       //   "rotation": [45, 45, 0],
