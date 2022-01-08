@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ecs/world.hpp"
+#include "../ecs/entity.hpp"
 #include "../components/camera.hpp"
 #include "../components/free-camera-controller.hpp"
 
@@ -10,6 +11,8 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+#include<iostream>
+
 namespace our
 {
 
@@ -26,15 +29,32 @@ namespace our
             this->app = app;
         }
         void update(World *world, float deltaTime){
-             for(auto entity : world->getEntities())
-             {
-                 if (entity->name=="fireBall")
-                 {
-                     /* code */
-                 }
-                 
-             }
-            //  if(app->getKeyboard().isPressed(GLFW_KEY_SPACE)) );
+            Entity* fireball = nullptr;
+            Entity* gun = nullptr;
+
+            for (auto entity : world->getEntities())
+            {
+                if (entity->name == "fireball")
+                {
+                    fireball = entity;
+                }
+
+                if (entity->name == "revolver")
+                {
+                    gun = entity;
+                }
+            }
+
+            std::cout << "ya rab tsht8al" << std::endl;
+            if (fireball == nullptr || gun == nullptr) return;
+
+            //if space bar is pressed set the fireball position to gun position
+            std::cout << "ya rab" << std::endl;
+            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE))
+            {
+                std::cout<<"eshta8lt"<<std::endl;
+                fireball->localTransform.position = gun->localTransform.position;
+            }
         }
 
         };

@@ -228,6 +228,7 @@
         ],
         "children": [
           {
+            "name": "revolver",
             "position": [1, -0.5, -1],
             "scale": [5.0, 5.0, 3.0],
             "components": [
@@ -289,11 +290,11 @@
         ]
       },
       {
+        "name": "fireball",
         "position": [1, -0.2, 8],
         "scale": [0.001, 0.001, 0.001],
         "components": [
           {
-            "name":"fireBall",
             "type": "Mesh Renderer",
             "mesh": "fireBall",
             "material": "fireBall"
