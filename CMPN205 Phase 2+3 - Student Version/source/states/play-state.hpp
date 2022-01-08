@@ -22,7 +22,7 @@ class Playstate : public our::State
     void onInitialize() override
     {
         // First of all, we get the scene configuration from the app config
-        auto &config = getApp()->getConfig()["scene"];
+        auto &config = getApp()->getConfig()["game"];
         // If we have assets in the scene config, we deserialize them
         if (config.contains("assets"))
         {
@@ -40,7 +40,12 @@ class Playstate : public our::State
 
     void onDraw(double deltaTime) override
     {
-        // Here, we just run a bunch of systems to control the world logic
+        if (getApp()->getKeyboard().isPressed(GLFW_KEY_ESCAPE))
+        { 
+            getApp()->setPause(true);
+            getApp()->changeState("main-menu"); 
+        }
+            // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         shooting.update(&world, (float)deltaTime);

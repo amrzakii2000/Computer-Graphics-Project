@@ -1,14 +1,14 @@
 {
-  "start-scene": "main",
+  "start-scene": "main-menu",
   "window": {
-    "title": "Default Game Window",
+    "title": "Bugs Squasher",
     "size": {
       "width": 1280,
       "height": 720
     },
     "fullscreen": false
   },
-  "scene": {
+  "game": {
     "assets": {
       "shaders": {
         "tinted": {

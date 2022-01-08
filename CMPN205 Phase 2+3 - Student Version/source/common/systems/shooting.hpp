@@ -61,7 +61,7 @@ namespace our
             if (!fireball|| !gun || !camera) return;
 
             time += deltaTime;
-            if(time > 0.6){
+            if(time > 1){
                 time = 0;
                 IsShot = false;
                 fireball->localTransform.position = gun->localTransform.position + glm::vec3(0, 0.2, 0.3);

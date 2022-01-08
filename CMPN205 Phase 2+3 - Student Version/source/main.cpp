@@ -14,6 +14,7 @@
 #include "states/material-test-state.hpp"
 #include "states/entity-test-state.hpp"
 #include "states/renderer-test-state.hpp"
+#include "states/main-menu-state.hpp"
 
 int main(int argc, char** argv) {
     
@@ -40,7 +41,8 @@ int main(int argc, char** argv) {
     our::Application app(app_config);
     
     // Register all the states of the project in the application
-    app.registerState<Playstate>("main");
+    app.registerState<MenuState>("main-menu");
+    app.registerState<Playstate>("game");
     app.registerState<MeshTestState>("mesh-test");
     app.registerState<TransformTestState>("transform-test");
     app.registerState<PipelineTestState>("pipeline-test");
