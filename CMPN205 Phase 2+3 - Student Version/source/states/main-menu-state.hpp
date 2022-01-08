@@ -39,8 +39,20 @@ class MenuState : public our::State
                 }
                 ImGui::EndTabItem();
 			}
+
 			if (ImGui::BeginTabItem("Game Controls"))
 			{
+                // Making a grid
+                ImGui::Columns(4, "mycolumns", false);
+                ImGui::NextColumn();
+
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text(" Movements");
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Camera");
+				ImGui::NextColumn();
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text("Hold your Left Mouse button  and move around");
 				ImGui::EndTabItem();
 			}
 
