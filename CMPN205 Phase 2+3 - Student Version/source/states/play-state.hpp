@@ -61,5 +61,6 @@ class Playstate : public our::State
         cameraController.exit();
         // and we delete all the loaded assets to free memory on the RAM and the VRAM
         our::clearAllAssets();
+        world.clear();
     }
 };
