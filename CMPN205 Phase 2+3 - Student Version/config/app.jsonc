@@ -248,8 +248,8 @@
                     "material": "fireBall"
                   },
                   {
-                    "type":"Shooting",
-                    "speed":-25
+                    "type": "Shooting",
+                    "speed": -25
                   }
                 ]
               }

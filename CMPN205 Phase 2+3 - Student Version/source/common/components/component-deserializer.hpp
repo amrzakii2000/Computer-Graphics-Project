@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ecs/entity.hpp"
+#include "light.hpp"
 #include "camera.hpp"
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
@@ -24,6 +25,8 @@ namespace our {
             component = entity->addComponent<MovementComponent>();
         } else if (type == ShootingComponent::getID()) {
             component = entity->addComponent<ShootingComponent>();
+        } else if (type == LightComponent::getID()) {
+            component = entity->addComponent<LightComponent>();
         }
         if(component) component->deserialize(data);
     }
