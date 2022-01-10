@@ -251,6 +251,10 @@
           },
           {
             "type": "Free Camera Controller"
+          },
+          {
+            "type": "Collider",
+            "radius": 4
           }
         ],
         "children": [
@@ -299,6 +303,10 @@
           {
             "type": "Movement",
             "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 5
           }
         ]
       },
@@ -315,6 +323,10 @@
           {
             "type": "Movement",
             "angularVelocity": [0, 45, 0]
+          },
+           {
+            "type": "Collider",
+            "radius": 5
           }
         ]
       },
@@ -331,6 +343,10 @@
           {
             "type": "Movement",
             "angularVelocity": [0, 45, 0]
+          },
+           {
+            "type": "Collider",
+            "radius": 5
           }
         ]
       },

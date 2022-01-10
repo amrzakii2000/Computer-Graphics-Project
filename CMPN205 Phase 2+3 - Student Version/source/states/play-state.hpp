@@ -8,6 +8,7 @@
 #include <systems/movement.hpp>
 #include <asset-loader.hpp>
 #include <systems/shooting.hpp>
+#include <systems/collision-controller.hpp>
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate : public our::State
@@ -18,6 +19,7 @@ class Playstate : public our::State
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
     our::shooting shooting;
+    our::CollisionSystem collision;
 
     void onInitialize() override
     {
@@ -36,6 +38,7 @@ class Playstate : public our::State
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
         shooting.enter(getApp());
+        collision.enter(getApp());
     }
 
     void onDraw(double deltaTime) override
@@ -48,6 +51,7 @@ class Playstate : public our::State
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         shooting.update(&world, (float)deltaTime);
+        collision.update(&world, (float)deltaTime);
 
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
