@@ -10,6 +10,8 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+#include<iostream>
+using namespace std;
 
 namespace our
 {
@@ -90,16 +92,52 @@ namespace our
 
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
-            float posy=position.y;
+            float posx = position.x;
+            float posy = position.y;
+            float posz = position.z;
 
-            if(app->getKeyboard().isPressed(GLFW_KEY_W)) position += front * (deltaTime * current_sensitivity.z);
-            if(app->getKeyboard().isPressed(GLFW_KEY_S)) position -= front * (deltaTime * current_sensitivity.z);
+            if (app->getKeyboard().isPressed(GLFW_KEY_W)) 
+            { 
+                glm::vec3 newPos = position + front * (deltaTime * current_sensitivity.z);
+                if (newPos.x > -9.5 && newPos.x < 5.5 && newPos.z > -85 && newPos.z < 30)
+                {
+                    position = newPos;
+                }
+                cout << position.z << endl;
+            }
+            
+            if (app->getKeyboard().isPressed(GLFW_KEY_S)) 
+            { 
+                glm::vec3 newPos = position - front * (deltaTime * current_sensitivity.z);
+                if (newPos.x > -9.5 && newPos.x < 5.5 && newPos.z > -85 && newPos.z < 30)
+                {
+                    position = newPos;
+                }
+            }
             // Q & E moves the player up and down
-            if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
-            if(app->getKeyboard().isPressed(GLFW_KEY_E)) position -= up * (deltaTime * current_sensitivity.y);
+            // if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
+            // if(app->getKeyboard().isPressed(GLFW_KEY_E)) position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x);
-            if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x);
+            if (app->getKeyboard().isPressed(GLFW_KEY_D)) 
+            {
+
+                glm::vec3 newPos = position + right * (deltaTime * current_sensitivity.x);
+
+                if (newPos.x > -9.5 && newPos.x < 5.5 && newPos.z > -85 && newPos.z < 30)
+                {
+                    position = newPos;
+                }
+            } 
+
+            if (app->getKeyboard().isPressed(GLFW_KEY_A)) 
+            {
+                glm::vec3 newPos = position - right * (deltaTime * current_sensitivity.x);
+                
+                if (newPos.x > -9.5 && newPos.x < 5.5 && newPos.z > -85 && newPos.z < 30)
+                {
+                    position = newPos;
+                }
+            } 
             position.y=posy;
         }
 

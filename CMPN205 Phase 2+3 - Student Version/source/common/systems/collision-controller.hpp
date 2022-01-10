@@ -69,20 +69,6 @@ namespace our
 								world->markForRemoval(collider1->getOwner());
 								world->markForRemoval(collider2->getOwner());
 							}
-
-							if (collider1Name == "fireball" && collider2Name == "lamp")
-							{
-								world->fireballsCount--;
-								world->markForRemoval(collider1->getOwner());
-								cout << "Hit lamp" << endl;
-							}
-							else if (collider2Name == "fireball" && collider1Name == "lamp")
-							{
-								cout << "Hit lamp" << endl;
-
-								world->fireballsCount--;
-								world->markForRemoval(collider2->getOwner());
-							}
 						}
 					}
 				}

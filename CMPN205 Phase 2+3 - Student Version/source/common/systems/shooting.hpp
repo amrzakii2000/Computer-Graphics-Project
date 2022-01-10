@@ -59,7 +59,7 @@ namespace our
 
             if (!shooting || !gun) return;
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_R) && world->fireballsCount < 1)
+            if (app->getKeyboard().isPressed(GLFW_KEY_R) && !fireball)
             {
                 Entity* fireball = world->add();
                 fireball->name = "fireball";
@@ -68,6 +68,10 @@ namespace our
                 fireball->localTransform.scale = glm::vec3(0.001f, 0.001f, 0.001f);
                 fireball->localTransform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 
+                world->fireballsCount++;
+            }
+            else if (fireball)
+            {
                 auto meshRenderer = fireball->addComponent<MeshRendererComponent>();
                 meshRenderer->mesh = AssetLoader<Mesh>::get("fireBall");
                 meshRenderer->material = AssetLoader<Material>::get("fireBall");
@@ -78,13 +82,12 @@ namespace our
                 auto collider = fireball->addComponent<Collider>();
                 collider->radius = 1.3f;
 
-                world->fireballsCount++;
-            }
-            else if (fireball && time > 0.8)
-            {
-                world->markForRemoval(fireball);
-                world->fireballsCount--;
-                time = 0;
+                if (time > 0.8)
+                {
+                    world->markForRemoval(fireball);
+                    world->fireballsCount--;
+                    time = 0;
+                }
             }
             time += deltaTime;
         }
