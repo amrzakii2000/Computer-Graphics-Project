@@ -34,27 +34,6 @@ class MenuState : public our::State
                 }
                 ImGui::EndTabItem();
 			}
-
-			if (ImGui::BeginTabItem("Game Controls"))
-			{
-                // Making a grid
-                ImGui::Columns(4, "mycolumns");
-
-				ImGui::AlignTextToFramePadding();
-                ImGui::Text(" Movements");
-                ImGui::AlignTextToFramePadding();
-                ImGui::Text("Camera");
-
-				ImGui::NextColumn();
-				ImGui::PushStyleColor(ImGuiCol_SliderGrab, ImVec4(ImColor(200, 155, 120)));
-				ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(ImColor(200, 155, 120)));
-
-
-				ImGui::Text("Hold your Left Mouse button  and move around");
-				ImGui::PopStyleColor(2);
-				ImGui::EndTabItem();
-			}
-
 		}
 		ImGui::EndTabBar();
 

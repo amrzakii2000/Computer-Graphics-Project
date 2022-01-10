@@ -80,7 +80,7 @@ namespace our
 
                 world->fireballsCount++;
             }
-            else if (fireball && time > 1.5)
+            else if (fireball && time > 0.8)
             {
                 world->markForRemoval(fireball);
                 world->fireballsCount--;

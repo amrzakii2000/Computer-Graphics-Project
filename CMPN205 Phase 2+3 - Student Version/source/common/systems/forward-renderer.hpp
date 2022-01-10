@@ -146,8 +146,11 @@ namespace our
                     command.material->shader->set("light_count", (int)lights.size());
                     for (int i = 0; i < lights.size(); i++)
                     {
+
                         std::string light_name = "lights[" + std::to_string(i) + "]";
                         glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
+                        auto pos = lights[i]->getOwner()->parent ? lights[i]->getOwner()->parent->localTransform.position + lightPos : lightPos;
+
                         switch (lights[i]->lightType)
                         {
                         case LightType::DIRECTIONAL:
@@ -160,7 +163,7 @@ namespace our
                             command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
                             break;
                         }
-                        command.material->shader->set(light_name + ".position", lightPos);
+                        command.material->shader->set(light_name + ".position", pos);
                         command.material->shader->set(light_name + ".color", lights[i]->color);
                         command.material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
                         command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);
