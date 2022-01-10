@@ -64,7 +64,7 @@ namespace our
                 Entity* fireball = world->add();
                 fireball->name = "fireball";
                 fireball->parent = gun;
-                fireball->localTransform.position = gun->localTransform.position;
+                fireball->localTransform.position = gun->localTransform.position + glm::vec3(-0.5, 0.2, -0.5);
                 fireball->localTransform.scale = glm::vec3(0.001f, 0.001f, 0.001f);
                 fireball->localTransform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 
@@ -76,11 +76,11 @@ namespace our
                 movement->linearVelocity = glm::vec3(0, 0, shooting->speed);
 
                 auto collider = fireball->addComponent<Collider>();
-                collider->radius = 2.0f;
+                collider->radius = 1.3f;
 
                 world->fireballsCount++;
             }
-            else if (fireball && time > 2)
+            else if (fireball && time > 1.5)
             {
                 world->markForRemoval(fireball);
                 world->fireballsCount--;

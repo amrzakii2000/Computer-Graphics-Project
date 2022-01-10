@@ -21,6 +21,17 @@ class Playstate : public our::State
     our::shooting shooting;
     our::CollisionSystem collision;
 
+
+    bool checkWin()
+    {
+        for (auto& entity : world.getEntities())
+        {
+            if (entity->name == "bug")
+                return false;
+        }
+        return true;
+    }
+
     void onInitialize() override
     {
         // First of all, we get the scene configuration from the app config
@@ -56,6 +67,11 @@ class Playstate : public our::State
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);
+
+        if (checkWin())
+        {
+            getApp()->changeState("win");
+        }
     }
 
     void onDestroy() override

@@ -119,6 +119,7 @@ set(STATES_SOURCES
         source/states/renderer-test-state.hpp
         source/states/main-menu-state.hpp
         source/states/lose-game-state.hpp
+        source/states/win-game-state.hpp
 )
 
 # For each example, we add an executable target

@@ -295,7 +295,7 @@
         ]
       },
       {
-        "name":"bug",
+        "name": "bug",
         "position": [0, -1, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
@@ -316,7 +316,7 @@
         ]
       },
       {
-        "name":"bug",
+        "name": "bug",
         "position": [5, -1, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
@@ -337,8 +337,198 @@
         ]
       },
       {
-        "name":"bug",
+        "name": "bug",
         "position": [-5, -1, 0],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [-5, -1, -15],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [0, -1, -15],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [5, -1, -15],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      
+      {
+        "name": "bug",
+        "position": [-5, -1, -30],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [0, -1, -30],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [5, -1, -30],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [-5, -1, -45],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [0, -1, -45],
+        "scale": [0.25, 0.25, 0.25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "bug",
+            "material": "bug"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 45, 0]
+          },
+          {
+            "type": "Collider",
+            "radius": 1
+          }
+        ]
+      },
+      {
+        "name": "bug",
+        "position": [5, -1, -45],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
         "components": [
