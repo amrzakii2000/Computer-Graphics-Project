@@ -4,6 +4,8 @@
 #include "../ecs/entity.hpp"
 #include "../components/camera.hpp"
 #include "../components/shootingComponent.hpp"
+#include "../components/collider.hpp"
+
 
 #include "../application.hpp"
 
@@ -12,6 +14,7 @@
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
 #include<iostream>
+using namespace std;
 
 namespace our
 {
@@ -22,58 +25,69 @@ namespace our
     class shooting
     {
         Application *app; // The application in which the state runs
-        bool IsShot;
         float time;
+
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)
         {
             this->app = app;
-            IsShot = false;
+            time = 0;
         }
         
-        void update(World *world, float deltaTime){
+        void update(World *world, float deltaTime)
+        {
             Entity* fireball = nullptr;
             Entity* gun = nullptr;
-            CameraComponent* camera = nullptr;
             ShootingComponent* shooting = nullptr;
 
             for (auto entity : world->getEntities())
             {
-                if (entity->name == "revolver")
-                {
+                if(entity->getComponent<ShootingComponent>() != nullptr){
+                    shooting = entity->getComponent<ShootingComponent>();
+                }
+
+                if (entity->name == "revolver") {
                     gun = entity;
                 }
 
-                if(entity->getComponent<CameraComponent>() != nullptr){
-                    camera = entity->getComponent<CameraComponent>();
-                }
-
-                if(entity->getComponent<ShootingComponent>() != nullptr){
-                    shooting = entity->getComponent<ShootingComponent>();
+                if (entity->name == "fireball") {
+                    fireball = entity;
                 }
                 
             }
 
-            if (shooting)
-                fireball = shooting->getOwner();
+            if (!shooting || !gun) return;
 
-            if (!fireball|| !gun || !camera) return;
+            if (app->getKeyboard().isPressed(GLFW_KEY_R) && world->fireballsCount < 1)
+            {
+                Entity* fireball = world->add();
+                fireball->name = "fireball";
+                fireball->parent = gun;
+                fireball->localTransform.position = gun->localTransform.position;
+                fireball->localTransform.scale = glm::vec3(0.001f, 0.001f, 0.001f);
+                fireball->localTransform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 
-            time += deltaTime;
-            if(time > 1){
+                auto meshRenderer = fireball->addComponent<MeshRendererComponent>();
+                meshRenderer->mesh = AssetLoader<Mesh>::get("fireBall");
+                meshRenderer->material = AssetLoader<Material>::get("fireBall");
+
+                auto movement = fireball->addComponent<MovementComponent>();
+                movement->linearVelocity = glm::vec3(0, 0, shooting->speed);
+
+                auto collider = fireball->addComponent<Collider>();
+                collider->radius = 2.0f;
+
+                world->fireballsCount++;
+            }
+            else if (fireball && time > 2)
+            {
+                world->markForRemoval(fireball);
+                world->fireballsCount--;
                 time = 0;
-                IsShot = false;
-                fireball->localTransform.position = gun->localTransform.position + glm::vec3(0, 0.2, 0.3);
             }
-            //if space bar is pressed set the fireball position to gun position
-            if (app->getKeyboard().isPressed(GLFW_KEY_E)) IsShot = true;
-
-            if(IsShot){
-                fireball->localTransform.position += deltaTime * glm::vec3(0, 0, shooting->speed);
-            }
-            
+            time += deltaTime;
         }
 
-        };
-    }
+     };
+}

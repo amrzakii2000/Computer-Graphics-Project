@@ -28,7 +28,9 @@ namespace our {
             component = entity->addComponent<ShootingComponent>();
         } else if (type == LightComponent::getID()) {
             component = entity->addComponent<LightComponent>();
-        } else if (type == Collider::getID())
+        } else if (type == Collider::getID()) {
+            component = entity->addComponent<Collider>();
+        }
         if(component) component->deserialize(data);
     }
 

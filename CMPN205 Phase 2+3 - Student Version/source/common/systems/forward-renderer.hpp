@@ -45,7 +45,10 @@ namespace our
         // viewportSize is the width & height of the viewport (in pixels). It is also used to compute the aspect ratio
         void render(World *world, glm::ivec2 viewportStart, glm::ivec2 viewportSize)
         {
+
+            world->deleteMarkedEntities();
             // First of all, we search for a camera and for all the mesh renderers
+
             CameraComponent *camera = nullptr;
             opaqueCommands.clear();
             transparentCommands.clear();

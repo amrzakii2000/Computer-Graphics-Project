@@ -11,8 +11,11 @@ namespace our {
         std::unordered_set<Entity*> markedForRemoval; // These are the entities that are awaiting to be deleted
                                                       // when deleteMarkedEntities is called
     public:
-
-        World() = default;
+        int fireballsCount;
+        World() 
+        {
+            fireballsCount = 0;
+        }
 
         // This will deserialize a json array of entities and add the new entities to the current world
         // If parent pointer is not null, the new entities will be have their parent set to that given pointer

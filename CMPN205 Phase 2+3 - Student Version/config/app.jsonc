@@ -41,8 +41,8 @@
         // "tunnel6":"assets/textures/ABSolnScifiMetallic-ABSolnSciFiRoughness@channels=B.png",
         "fireBall": "assets/textures/fire.front.png",
         "lamp": "assets/textures/lamp.jpg",
-        "roughness" : "assets/textures/roughness.jpg",
-        "albedo" : "assets/textures/albedo.jpg"
+        "roughness": "assets/textures/roughness.jpg",
+        "albedo": "assets/textures/albedo.jpg"
       },
       "meshes": {
         // "cube": "assets/models/cube.obj",
@@ -191,8 +191,8 @@
           "tint": [1, 1, 1, 1],
           "texture": "tunnel2",
           "sampler": "default",
-          "roughness":"roughness"
-         // "albedo":"albedo"
+          "roughness": "roughness"
+          // "albedo":"albedo"
         },
         "fireBall": {
           "type": "textured",
@@ -251,10 +251,6 @@
           },
           {
             "type": "Free Camera Controller"
-          },
-          {
-            "type": "Collider",
-            "radius": 4
           }
         ],
         "children": [
@@ -267,6 +263,14 @@
                 "type": "Mesh Renderer",
                 "mesh": "Revolver",
                 "material": "Revolver"
+              },
+              {
+                "type": "Collider",
+                "radius": 0.5
+              },
+              {
+                "type": "Shooting",
+                "speed": -15
               }
             ],
             "children": [
@@ -281,8 +285,8 @@
               //       "material": "fireBall"
               //     },
               //     {
-              //       "type": "Shooting",
-              //       "speed": -25
+              //       "type": "Collider",
+              //       "radius": 0.1
               //     }
               //   ]
               // }
@@ -291,7 +295,8 @@
         ]
       },
       {
-        "position": [0, 0, 0],
+        "name":"bug",
+        "position": [0, -1, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
         "components": [
@@ -306,12 +311,13 @@
           },
           {
             "type": "Collider",
-            "radius": 5
+            "radius": 1
           }
         ]
       },
       {
-        "position": [5, 0, 0],
+        "name":"bug",
+        "position": [5, -1, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
         "components": [
@@ -324,14 +330,15 @@
             "type": "Movement",
             "angularVelocity": [0, 45, 0]
           },
-           {
+          {
             "type": "Collider",
-            "radius": 5
+            "radius": 1
           }
         ]
       },
       {
-        "position": [-5, 0, 0],
+        "name":"bug",
+        "position": [-5, -1, 0],
         "scale": [0.25, 0.25, 0.25],
         "rotation": [0, 0, 0],
         "components": [
@@ -344,9 +351,9 @@
             "type": "Movement",
             "angularVelocity": [0, 45, 0]
           },
-           {
+          {
             "type": "Collider",
-            "radius": 5
+            "radius": 1
           }
         ]
       },
@@ -385,6 +392,10 @@
             "type": "Mesh Renderer",
             "mesh": "tunnel6",
             "material": "tunnel"
+          },
+          {
+            "type": "Collider",
+            "radius": 1
           }
         ]
       },
@@ -402,9 +413,13 @@
             "type": "Light",
             "color": [0.7, 1, 1],
             "direction": [0, -1, 0],
-            "cone_angles":[10, 50],
+            "cone_angles": [10, 50],
             "attenuation": [0.01, 0.01, 0.001],
             "lightType": "Spot"
+          },
+          {
+            "type": "Collider",
+            "radius": 3
           }
         ]
       },
@@ -422,9 +437,13 @@
             "type": "Light",
             "color": [1, 0, 1],
             "direction": [0, -1, 0],
-            "cone_angles":[10, 50],
+            "cone_angles": [10, 50],
             "attenuation": [0.01, 0.01, 0.001],
             "lightType": "Spot"
+          },
+          {
+            "type": "Collider",
+            "radius": 3
           }
         ]
       },
@@ -442,9 +461,13 @@
             "type": "Light",
             "color": [0.7, 1, 0.4],
             "direction": [0, -1, 0],
-            "cone_angles":[10, 50],
+            "cone_angles": [10, 50],
             "attenuation": [0.01, 0.01, 0.001],
             "lightType": "Spot"
+          },
+          {
+            "type": "Collider",
+            "radius": 3
           }
         ]
       }
