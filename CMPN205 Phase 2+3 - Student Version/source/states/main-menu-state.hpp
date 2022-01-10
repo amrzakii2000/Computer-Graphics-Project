@@ -13,9 +13,6 @@ class MenuState : public our::State
 {
 	void onImmediateGui() override
 	{
-		bool paused = getApp()->IsPaused();
-		bool running = getApp()->IsRunning();
-
 		ImGuiStyle& style = ImGui::GetStyle();
 		style.FramePadding = ImVec2(15, 12);
 		style.ItemSpacing = ImVec2(10, 50);
@@ -31,10 +28,8 @@ class MenuState : public our::State
 		{
 			if (ImGui::BeginTabItem("Home"))
 			{
-                if(ImGui::Button(!paused ? "New Game" : "Continue"))
+                if(ImGui::Button("New Game"))
                 {
-					getApp()->setRunning(true);
-					getApp()->setPause(false);
                     getApp()->changeState("game");
                 }
                 ImGui::EndTabItem();
@@ -43,16 +38,20 @@ class MenuState : public our::State
 			if (ImGui::BeginTabItem("Game Controls"))
 			{
                 // Making a grid
-                ImGui::Columns(4, "mycolumns", false);
-                ImGui::NextColumn();
+                ImGui::Columns(4, "mycolumns");
 
-                ImGui::AlignTextToFramePadding();
+				ImGui::AlignTextToFramePadding();
                 ImGui::Text(" Movements");
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Camera");
+
 				ImGui::NextColumn();
-				ImGui::AlignTextToFramePadding();
+				ImGui::PushStyleColor(ImGuiCol_SliderGrab, ImVec4(ImColor(200, 155, 120)));
+				ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(ImColor(200, 155, 120)));
+
+
 				ImGui::Text("Hold your Left Mouse button  and move around");
+				ImGui::PopStyleColor(2);
 				ImGui::EndTabItem();
 			}
 

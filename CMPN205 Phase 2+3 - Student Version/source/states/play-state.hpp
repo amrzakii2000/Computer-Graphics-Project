@@ -42,7 +42,6 @@ class Playstate : public our::State
     {
         if (getApp()->getKeyboard().isPressed(GLFW_KEY_ESCAPE))
         { 
-            getApp()->setPause(true);
             getApp()->changeState("main-menu"); 
         }
             // Here, we just run a bunch of systems to control the world logic

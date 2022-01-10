@@ -56,8 +56,6 @@ namespace our {
         
         Keyboard keyboard;                  // Instance of "our" keyboard class that handles keyboard functionalities.
         Mouse mouse;                        // Instance of "our" mouse class that handles mouse functionalities.
-        bool isRunning;
-        bool isPaused;
 
         nlohmann::json app_config;           // A Json file that contains all application configuration
 
@@ -75,15 +73,9 @@ namespace our {
     public:
 
         // Create an application with following configuration
-        Application(const nlohmann::json& app_config) : app_config(app_config) { isPaused = false; isRunning = false; }
+        Application(const nlohmann::json& app_config) : app_config(app_config) { }
         // On destruction, delete all the states
         ~Application(){ for (auto &it : states) delete it.second; }
-
-        bool IsPaused() const { return isPaused; }
-        bool IsRunning() const { return isRunning; }
-
-        void setPause(bool gameState) { isPaused = gameState; }
-        void setRunning(bool gameState) { isRunning = gameState; }
 
         // This is the main class function that run the whole application (Initialize, Game loop, House cleaning).
         int run(int run_for_frames = 0);
