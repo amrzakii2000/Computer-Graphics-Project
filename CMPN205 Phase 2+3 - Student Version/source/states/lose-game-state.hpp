@@ -30,6 +30,7 @@ class LoseState : public our::State
 			{
                 if(ImGui::Button("Return to main menu"))
                 {
+					//Return to start a new game
                     getApp()->changeState("main-menu");
                 }
                 ImGui::EndTabItem();

@@ -24,6 +24,7 @@ class Playstate : public our::State
 
     bool checkWin()
     {
+        //Checif there is  still some bugs
         for (auto& entity : world.getEntities())
         {
             if (entity->name == "bug")
@@ -68,8 +69,10 @@ class Playstate : public our::State
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);
 
+        //Check if the player won the game
         if (checkWin())
         {
+            //Show win game state
             getApp()->changeState("win");
         }
     }

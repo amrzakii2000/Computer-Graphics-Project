@@ -98,9 +98,11 @@ namespace our
 
             if (app->getKeyboard().isPressed(GLFW_KEY_W)) 
             { 
+                //Check if the new position is within the boundries
                 glm::vec3 newPos = position + front * (deltaTime * current_sensitivity.z);
                 if (newPos.x > -9.5 && newPos.x < 5.5 && newPos.z > -85 && newPos.z < 30)
                 {
+                    //Set the new position that is within the boundries
                     position = newPos;
                 }
                 cout << position.z << endl;
@@ -121,20 +123,24 @@ namespace our
             if (app->getKeyboard().isPressed(GLFW_KEY_D)) 
             {
 
+                // Check if the new position is within the boundries
                 glm::vec3 newPos = position + right * (deltaTime * current_sensitivity.x);
 
                 if (newPos.x > -9.5 && newPos.x < 5.5 && newPos.z > -85 && newPos.z < 30)
                 {
+                    // Set the new position that is within the boundries
                     position = newPos;
                 }
             } 
 
             if (app->getKeyboard().isPressed(GLFW_KEY_A)) 
             {
+                // Check if the new position is within the boundries
                 glm::vec3 newPos = position - right * (deltaTime * current_sensitivity.x);
                 
                 if (newPos.x > -9.5 && newPos.x < 5.5 && newPos.z > -85 && newPos.z < 30)
                 {
+                    // Set the new position that is within the boundries
                     position = newPos;
                 }
             } 

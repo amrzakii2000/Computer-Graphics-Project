@@ -46,6 +46,7 @@ namespace our
         void render(World *world, glm::ivec2 viewportStart, glm::ivec2 viewportSize)
         {
 
+            //Delete the objects that are marked for removal
             world->deleteMarkedEntities();
             // First of all, we search for a camera and for all the mesh renderers
 
@@ -139,6 +140,7 @@ namespace our
                 {
                     LitMaterial *litMaterial = dynamic_cast<LitMaterial *>(command.material);
 
+                    //bab3thom lel vertex shader
                     command.material->shader->set("VP", VP);
                     command.material->shader->set("eye", eye);
                     command.material->shader->set("M", command.localToWorld);
@@ -146,11 +148,16 @@ namespace our
                     command.material->shader->set("light_count", (int)lights.size());
                     for (int i = 0; i < lights.size(); i++)
                     {
-
+                        //light name
                         std::string light_name = "lights[" + std::to_string(i) + "]";
-                        glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
-                        auto pos = lights[i]->getOwner()->parent ? lights[i]->getOwner()->parent->localTransform.position + lightPos : lightPos;
+                        
+                        //light transform position
+                        glm::vec3 lightPos = lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+                        glm::vec3 parentPos = lights[i]->getOwner()->parent ? lights[i]->getOwner()->parent->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1) : glm::vec3(0, 0, 0);
+                        //Setting position of light
+                        auto pos =  parentPos + lightPos;
 
+                        //  Setting light color for the fragment shader
                         switch (lights[i]->lightType)
                         {
                         case LightType::DIRECTIONAL:
@@ -175,10 +182,11 @@ namespace our
             {
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
-                if (dynamic_cast<LitMaterial*>(command.material))
+                if (dynamic_cast<LitMaterial *>(command.material))
                 {
-                    LitMaterial* litMaterial = dynamic_cast<LitMaterial*>(command.material);
+                    LitMaterial *litMaterial = dynamic_cast<LitMaterial *>(command.material);
 
+                    // bab3thom lel vertex shader
                     command.material->shader->set("VP", VP);
                     command.material->shader->set("eye", eye);
                     command.material->shader->set("M", command.localToWorld);
@@ -186,8 +194,16 @@ namespace our
                     command.material->shader->set("light_count", (int)lights.size());
                     for (int i = 0; i < lights.size(); i++)
                     {
+                        // light name
                         std::string light_name = "lights[" + std::to_string(i) + "]";
-                        glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
+
+                        // light transform position
+                        glm::vec3 lightPos = lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+                        glm::vec3 parentPos = lights[i]->getOwner()->parent ? lights[i]->getOwner()->parent->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1) : glm::vec3(0, 0, 0);
+                        // Setting position of light
+                        auto pos = parentPos + lightPos;
+
+                        //  Setting light color for the fragment shader
                         switch (lights[i]->lightType)
                         {
                         case LightType::DIRECTIONAL:
@@ -200,7 +216,7 @@ namespace our
                             command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
                             break;
                         }
-                        command.material->shader->set(light_name + ".position", lightPos);
+                        command.material->shader->set(light_name + ".position", pos);
                         command.material->shader->set(light_name + ".color", lights[i]->color);
                         command.material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
                         command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);

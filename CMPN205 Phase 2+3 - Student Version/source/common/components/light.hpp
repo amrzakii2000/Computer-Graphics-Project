@@ -22,8 +22,8 @@ namespace our {
         LightType lightType; // The type of the light
         glm::vec3 color = glm::vec3(0, 0, 0); // The color of the light
 
-        glm::vec3 attenuation = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 direction = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 attenuation = glm::vec3(0.0f, 0.0f, 0.0f); // The attenuation of the light for intensity
+        glm::vec3 direction = glm::vec3(0.0f, 0.0f, 0.0f);  //direction of light for (Directional and Spot)
         glm::vec2 cone_angles = glm::vec2(0.0f, 0.0f);
 
         static std::string getID() { return "Light"; }

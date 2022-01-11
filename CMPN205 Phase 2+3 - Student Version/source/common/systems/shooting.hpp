@@ -32,6 +32,8 @@ namespace our
         void enter(Application *app)
         {
             this->app = app;
+
+            //Set the time to delete the fireball
             time = 0;
         }
         
@@ -43,14 +45,17 @@ namespace our
 
             for (auto entity : world->getEntities())
             {
+                //If we have a shooting component
                 if(entity->getComponent<ShootingComponent>() != nullptr){
                     shooting = entity->getComponent<ShootingComponent>();
                 }
 
+                //If we have a revolver entity
                 if (entity->name == "revolver") {
                     gun = entity;
                 }
 
+                // If we have a fireball entity
                 if (entity->name == "fireball") {
                     fireball = entity;
                 }
@@ -59,6 +64,7 @@ namespace our
 
             if (!shooting || !gun) return;
 
+            //Create a new fireball on key press
             if (app->getKeyboard().isPressed(GLFW_KEY_R) && !fireball)
             {
                 Entity* fireball = world->add();
@@ -67,11 +73,10 @@ namespace our
                 fireball->localTransform.position = gun->localTransform.position + glm::vec3(-0.5, 0.2, -0.5);
                 fireball->localTransform.scale = glm::vec3(0.001f, 0.001f, 0.001f);
                 fireball->localTransform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-
-                world->fireballsCount++;
             }
             else if (fireball)
             {
+                //Add the components of the fireball entity
                 auto meshRenderer = fireball->addComponent<MeshRendererComponent>();
                 meshRenderer->mesh = AssetLoader<Mesh>::get("fireBall");
                 meshRenderer->material = AssetLoader<Material>::get("fireBall");
@@ -82,10 +87,10 @@ namespace our
                 auto collider = fireball->addComponent<Collider>();
                 collider->radius = 1.3f;
 
+                //Delete teh fireball after some time
                 if (time > 0.8)
                 {
                     world->markForRemoval(fireball);
-                    world->fireballsCount--;
                     time = 0;
                 }
             }

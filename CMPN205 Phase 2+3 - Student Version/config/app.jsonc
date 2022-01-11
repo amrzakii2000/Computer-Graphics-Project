@@ -244,6 +244,7 @@
     },
     "world": [
       {
+        "name":"person",
         "position": [0, 0, 10],
         "components": [
           {
@@ -251,6 +252,10 @@
           },
           {
             "type": "Free Camera Controller"
+          },
+          {
+            "type":"Collider",
+            "radius": 0.5
           }
         ],
         "children": [

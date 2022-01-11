@@ -30,6 +30,7 @@ class MenuState : public our::State
 			{
                 if(ImGui::Button("New Game"))
                 {
+					//Begin new game
                     getApp()->changeState("game");
                 }
                 ImGui::EndTabItem();
