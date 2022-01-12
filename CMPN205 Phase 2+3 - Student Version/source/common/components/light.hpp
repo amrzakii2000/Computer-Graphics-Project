@@ -24,7 +24,7 @@ namespace our {
 
         glm::vec3 attenuation = glm::vec3(0.0f, 0.0f, 0.0f); // The attenuation of the light for intensity
         glm::vec3 direction = glm::vec3(0.0f, 0.0f, 0.0f);  //direction of light for (Directional and Spot)
-        glm::vec2 cone_angles = glm::vec2(0.0f, 0.0f);
+        glm::vec2 cone_angles = glm::vec2(0.0f, 0.0f);  //cone angles (outer and inner) for spot light
 
         static std::string getID() { return "Light"; }
 

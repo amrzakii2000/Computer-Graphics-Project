@@ -144,7 +144,9 @@ namespace our
                     command.material->shader->set("VP", VP);
                     command.material->shader->set("eye", eye);
                     command.material->shader->set("M", command.localToWorld);
-                    command.material->shader->set("M_IT", glm::inverse(command.localToWorld));
+                    command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
+
+                    //bab3thom lel Fragment shader
                     command.material->shader->set("light_count", (int)lights.size());
                     for (int i = 0; i < lights.size(); i++)
                     {
@@ -153,7 +155,10 @@ namespace our
                         
                         //light transform position
                         glm::vec3 lightPos = lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+                        
+                        //law leh parent ngeeb el position relative lel light
                         glm::vec3 parentPos = lights[i]->getOwner()->parent ? lights[i]->getOwner()->parent->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1) : glm::vec3(0, 0, 0);
+                        
                         //Setting position of light
                         auto pos =  parentPos + lightPos;
 
